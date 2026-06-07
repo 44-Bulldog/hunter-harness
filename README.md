@@ -53,9 +53,9 @@ The default loop for any non-trivial build:
 /reload-plugins        # or start a fresh session
 ```
 
-**On another machine (after pushing this repo to GitHub):**
+**On another machine (from GitHub):**
 ```
-/plugin marketplace add <your-github-user>/claude-harness
+/plugin marketplace add 44-Bulldog/hunter-harness
 /plugin install superpowers-hunter@hunter-harness
 ```
 
