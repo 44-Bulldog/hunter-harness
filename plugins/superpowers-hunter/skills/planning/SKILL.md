@@ -19,6 +19,8 @@ Use this before building anything non-trivial, and whenever the user wants to th
 
 5. **Hand off to execution.** With the approach and the minimal slice defined: for a small slice, just build it — implementation is writing code + testing + fixing, iterating testably. For a large or multi-file slice, use the `writing-plans` skill first to turn it into a concrete task doc, then execute. Check back in only where the plan was genuinely uncertain.
 
+**Roadmap.** If the plan sets or shifts the project's overall direction, reflect it in `BUILD_PLAN.md` — a high-level living roadmap (near-term detailed, further-out directional, kept lean). Ongoing progress on it is reconciled by `/lint-docs`, not maintained here.
+
 ## Red flags — stop if you catch yourself
 
 | Thought | Reality |
