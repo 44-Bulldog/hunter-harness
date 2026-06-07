@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "hunter-harness",
+  "description": "Hunter's personal Claude Code harness",
+  "owner": {
+    "name": "Hunter Hammarberg"
+  },
+  "plugins": [
+    {
+      "name": "superpowers-hunter",
+      "description": "Personal coding harness: planning, debugging, verification, TDD-when-warranted.",
+      "category": "development",
+      "source": "./plugins/superpowers-hunter"
+    }
+  ]
+}
