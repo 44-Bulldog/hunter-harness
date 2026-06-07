@@ -27,6 +27,8 @@ If the user (or their memory/preferences) wants something a skill would do diffe
 - "Fix this bug / test failure / unexpected behavior" → **systematic-debugging** first.
 - About to claim something is done / fixed / passing → **verification-before-completion**.
 - Have a *large* chosen slice to break into a concrete task doc → **writing-plans** (skip for small slices — just build them).
+- Deciding to defer / park / backlog something instead of building it now → **backlog**.
+- After completing a meaningful change (feature, fix, refactor), or asked to log one → **changelog** (keep `CHANGELOG.md` current with what + why).
 - Writing or editing a skill → **writing-skills**.
 
 ## How to use a skill
