@@ -6,7 +6,7 @@ kanban-plugin: board
 
 ## Backlog
 
-- [ ] Set up on the work machine: `/plugin marketplace add 44-Bulldog/hunter-harness` → `/plugin install superpowers-hunter@hunter-harness` → disable upstream there
+- [ ] Set up on the work machine: `/plugin marketplace add 44-Bulldog/Bulldog` → `/plugin install superpowers-hunter@hunter-harness` → disable upstream there
 - [ ] Smoke-test in a fresh session: `planning` fires on "let's build X"; "backlog that" and "update the changelog" trigger their skills
 - [ ] Discuss git worktrees + better git/commit discipline, then likely add a harness skill for it _(next conversation)_
 - [ ] Automate `/lint-docs` via a guarded, detached Stop hook running headless `claude -p` — phase 2 of doc-linting

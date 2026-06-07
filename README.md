@@ -63,9 +63,11 @@ The split: the *why* behind a change or a deferral is perishable, so skills capt
 
 **On another machine (from GitHub):**
 ```
-/plugin marketplace add 44-Bulldog/hunter-harness
+/plugin marketplace add 44-Bulldog/Bulldog
 /plugin install superpowers-hunter@hunter-harness
 ```
+
+(The marketplace's internal name is still `hunter-harness` — that comes from `marketplace.json`, not the repo name.)
 
 If another skills/bootstrap plugin is installed, disable it so two bootstraps don't both fire — set it to `false` under `enabledPlugins` in `~/.claude/settings.json`, or toggle it in the `/plugin` UI. The harness takes effect on a fresh session, since the bootstrap loads via the SessionStart hook.
 
