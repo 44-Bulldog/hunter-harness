@@ -17,7 +17,7 @@ Use this before building anything non-trivial, and whenever the user wants to th
 
 4. **Park the spillover.** Everything deferred during scope-down goes to `BACKLOG.md` at the repo root (Obsidian Kanban format). Groom while you're there: merge near-duplicates, drop exact dupes, flag contradictions. Don't just append.
 
-5. **Hand off to execution.** With the plan and the minimal slice defined, implementation is writing code + testing + fixing. Do it and iterate testably; check back in only where the plan was genuinely uncertain.
+5. **Hand off to execution.** With the approach and the minimal slice defined: for a small slice, just build it — implementation is writing code + testing + fixing, iterating testably. For a large or multi-file slice, use the `writing-plans` skill first to turn it into a concrete task doc, then execute. Check back in only where the plan was genuinely uncertain.
 
 ## Red flags — stop if you catch yourself
 

@@ -1,11 +1,13 @@
 ---
 name: writing-plans
-description: Use when an approach is chosen and you need to turn it into a concrete, file-specific task plan that can be executed autonomously.
+description: Use after planning, only when the chosen slice is large or multi-file enough that a written step-by-step task plan earns its keep — turns an approach into a concrete, file-specific plan for autonomous execution. Skip it for small slices.
 ---
 
 # Writing Plans
 
 Use after `planning` has chosen an approach and scoped the minimal testable slice. This turns that slice into a plan detailed enough that execution is just writing code, testing, and fixing — with little further input.
+
+**Skip this for small slices.** If the slice is a few files you can hold in your head, just build it — a written plan is overhead. Reach for this when the work is large or multi-file enough that a precise, step-by-step doc keeps execution on track.
 
 Write the plan assuming the implementer has little context for this codebase: which files to touch, what each is responsible for, the actual code/changes, and how to check each step.
 

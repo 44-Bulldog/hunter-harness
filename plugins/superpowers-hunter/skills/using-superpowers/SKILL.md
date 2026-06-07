@@ -26,7 +26,7 @@ If the user (or their memory/preferences) wants something a skill would do diffe
 - "Let's build / add / design X" → **planning** first (approaches + tradeoffs, then scope to the minimal testable version), then implementation.
 - "Fix this bug / test failure / unexpected behavior" → **systematic-debugging** first.
 - About to claim something is done / fixed / passing → **verification-before-completion**.
-- Have a chosen approach to break into concrete tasks → **writing-plans**.
+- Have a *large* chosen slice to break into a concrete task doc → **writing-plans** (skip for small slices — just build them).
 - Writing or editing a skill → **writing-skills**.
 
 ## How to use a skill
