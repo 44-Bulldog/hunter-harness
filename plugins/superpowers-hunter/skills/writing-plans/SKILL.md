@@ -26,6 +26,10 @@ Before listing tasks, map which files get created or modified and what each is r
 
 Break the work into concrete steps, each producing a self-contained change that stands on its own. A step names exact files, shows the actual code/change (no placeholders), and states how to verify it — running the thing, or a test where the logic warrants one (see the `test-driven-development` skill for when that's worth it). Keep the minimal slice first; sequence later steps so each is independently testable.
 
+Use the fewest steps that each stay independently verifiable. Merge anything always built and tested together; split only when a step gets too big to verify in one go, or a natural test boundary falls between them. A 2–4 file change is usually 1–3 tasks, not one task per file.
+
+Detail only the slice you're building now. Work already deferred during planning (parked in `BACKLOG.md`) stays a one-line pointer here, not a full task block — unless the user explicitly asks for a detailed plan of the later work too.
+
 ## Task structure
 
 ```markdown
