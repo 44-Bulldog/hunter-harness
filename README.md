@@ -87,7 +87,7 @@ The split: the *why* is perishable, so skills capture it in the moment; the *sta
 
 **On another machine (from GitHub):**
 ```
-/plugin marketplace add 44-Bulldog/Bulldog
+/plugin marketplace add 44-Bulldog/hunter-harness
 /plugin install superpowers-hunter@hunter-harness
 ```
 
