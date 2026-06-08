@@ -1,16 +1,16 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "hunter-harness",
-  "description": "Hunter's personal Claude Code harness",
+  "name": "lean-powers",
+  "description": "A lean Claude Code coding harness — a pruned, retuned fork of obra/superpowers.",
   "owner": {
-    "name": "Hunter Hammarberg"
+    "name": "44-Bulldog"
   },
   "plugins": [
     {
-      "name": "superpowers-hunter",
-      "description": "Personal coding harness: planning, debugging, verification, TDD-when-warranted.",
+      "name": "lean-powers",
+      "description": "Lean coding harness: planning, debugging, verification, TDD-when-warranted.",
       "category": "development",
-      "source": "./plugins/superpowers-hunter"
+      "source": "./plugins/lean-powers"
     }
   ]
 }

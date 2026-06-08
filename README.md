@@ -1,12 +1,12 @@
-# Hunter's Claude Code Harness
+# lean-powers
 
-A personal Claude Code plugin that shapes *how* a coding agent works with you — plan first, build the smallest testable thing, weigh options instead of dictating, and keep the repo's docs alive as durable context. A small, curated set of *skills* (workflows the agent triggers automatically) plus one *command*, installed once and used identically on every machine.
+A lean Claude Code plugin that shapes *how* a coding agent works with you — plan first, build the smallest testable thing, weigh options instead of dictating, and keep the repo's docs alive as durable context. A small, curated set of *skills* (workflows the agent triggers automatically) plus one *command*, installed once and used identically on every machine.
 
-Plugin: `superpowers-hunter` · Marketplace: `hunter-harness`
+Plugin: `lean-powers` · Marketplace: `lean-powers`
 
 ## Philosophy
 
-This harness encodes one person's way of working with a coding agent. The bets it makes:
+This harness encodes an opinionated way of working with a coding agent. The bets it makes:
 
 - **Plan deeply, then build the smallest testable thing.** Most of the value is in thinking a problem through until execution is obvious — *then* you ship a minimal slice, test it, and iterate, rather than building the full production version up front. Scoping down is a first-class step, and what gets cut is parked, not lost.
 - **A thinking partner, not an order-taker.** When you're deciding something, the agent lays out real options with tradeoffs instead of asserting one answer — even when you've already picked one, so you can reason through it. Your instructions and saved preferences always outrank any skill.
@@ -80,29 +80,26 @@ The split: the *why* is perishable, so skills capture it in the moment; the *sta
 
 **Locally (this machine, dev loop):**
 ```
-/plugin marketplace add ~/claude-harness
-/plugin install superpowers-hunter@hunter-harness
+/plugin marketplace add ~/lean-powers
+/plugin install lean-powers@lean-powers
 /reload-plugins        # or start a fresh session
 ```
 
 **On another machine (from GitHub):**
 ```
-/plugin marketplace add 44-Bulldog/hunter-harness
-/plugin install superpowers-hunter@hunter-harness
+/plugin marketplace add 44-Bulldog/lean-powers
+/plugin install lean-powers@lean-powers
 ```
-
-(The marketplace's internal name is still `hunter-harness` — that comes from `marketplace.json`, not the repo name.)
 
 If another skills/bootstrap plugin is installed, disable it so two bootstraps don't both fire — set it to `false` under `enabledPlugins` in `~/.claude/settings.json`, or toggle it in the `/plugin` UI. The harness takes effect on a fresh session, since the bootstrap loads via the SessionStart hook.
 
 ## Layout
 
 ```
-claude-harness/
+lean-powers/
 ├─ .claude-plugin/marketplace.json      # marketplace manifest
 ├─ README.md
-├─ BACKLOG.md                           # this repo's own backlog
-└─ plugins/superpowers-hunter/
+└─ plugins/lean-powers/
    ├─ .claude-plugin/plugin.json        # plugin manifest
    ├─ hooks/                            # SessionStart bootstrap injector
    ├─ commands/                         # /lint-docs
@@ -112,8 +109,8 @@ claude-harness/
 ## Customizing
 
 - **Change behavior:** edit a skill's `SKILL.md` — the frontmatter `description` controls *when* it fires; the body controls *what* the agent does. Re-run `/reload-plugins` or start a fresh session.
-- **Add a skill:** new folder `plugins/superpowers-hunter/skills/<name>/SKILL.md`. The `writing-skills` skill covers the conventions.
-- **Add a command:** new `plugins/superpowers-hunter/commands/<name>.md` for an explicit `/slash` trigger (used here only for `/lint-docs` — auto-firing behaviors are skills).
+- **Add a skill:** new folder `plugins/lean-powers/skills/<name>/SKILL.md`. The `writing-skills` skill covers the conventions.
+- **Add a command:** new `plugins/lean-powers/commands/<name>.md` for an explicit `/slash` trigger (used here only for `/lint-docs` — auto-firing behaviors are skills).
 
 ## Credits
 

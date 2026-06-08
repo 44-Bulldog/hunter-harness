@@ -1,0 +1,10 @@
+{
+  "name": "lean-powers",
+  "description": "A lean Claude Code coding harness — a pruned, retuned fork of obra/superpowers: planning (tradeoffs + minimal-testable scoping), systematic debugging, verification, and TDD-when-warranted.",
+  "version": "0.1.0",
+  "author": {
+    "name": "44-Bulldog"
+  },
+  "license": "MIT",
+  "keywords": ["skills", "planning", "debugging", "workflow"]
+}
