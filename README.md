@@ -1,18 +1,54 @@
 # lean-powers
 
-A lean Claude Code plugin that shapes *how* a coding agent works with you — plan first, build the smallest testable thing, weigh options instead of dictating, and keep the repo's docs alive as durable context. A small, curated set of *skills* (workflows the agent triggers automatically) plus one *command*, installed once and used identically on every machine.
+lean-powers is a Claude Code plugin that shapes *how* a coding agent works with you: think the problem through, build the smallest thing you can actually test, then iterate — and keep the repo's own docs alive so every session starts oriented. A small, curated set of *skills* that fire automatically, plus one *command*. Install once; same behavior on every machine.
+
+A lean fork of [obra/superpowers](https://github.com/obra/superpowers) — fewer skills, softened ceremony, tuned for solo, fast-moving work.
 
 Plugin: `lean-powers` · Marketplace: `lean-powers`
 
-## Philosophy
+## In a nutshell
 
-This harness encodes an opinionated way of working with a coding agent. The bets it makes:
+Four bets, expanded in the sections below:
 
-- **Plan deeply, then build the smallest testable thing.** Most of the value is in thinking a problem through until execution is obvious — *then* you ship a minimal slice, test it, and iterate, rather than building the full production version up front. Scoping down is a first-class step, and what gets cut is parked, not lost.
-- **A thinking partner, not an order-taker.** When you're deciding something, the agent lays out real options with tradeoffs instead of asserting one answer — even when you've already picked one, so you can reason through it. Your instructions and saved preferences always outrank any skill.
-- **The repo is the context.** Four living docs — changelog, backlog, build plan, README — stay current as you work, so any session (you or an agent) starts oriented instead of re-deriving state. The *why* behind a change is perishable, so it's captured in the moment; the *state* of the docs is reconstructable, so it's reconciled on demand.
-- **Discipline where it pays, not as ceremony.** TDD when logic is worth protecting, skipped for spikes and glue. Root-cause debugging before patching. Verify before claiming done. But no mandatory test-first-on-everything, and no forced subagent / worktree / review pipeline that overscopes solo, fast-moving work.
-- **Lean and portable.** One repo, one install, same behavior everywhere.
+- **Plan deeply, then build lean.** The value is in thinking until execution is obvious — *then* shipping the smallest testable slice and iterating, not building the production version up front.
+- **A thinking partner, not an order-taker.** When you're deciding, the agent lays out real options with tradeoffs instead of asserting one — even when you've already picked. Your instructions and memory always outrank a skill.
+- **The repo is the context.** A handful of living docs stay current as you work, so the next session (you or an agent) reads state instead of re-deriving it.
+- **Discipline where it pays, not as ceremony.** Root-cause before patching, tests where logic is worth protecting, verify before claiming done — but no mandatory process tax on throwaway work.
+
+## What it encodes
+
+The behavior splits into four parts. They're meant to be MECE — each owns a distinct stage of the work.
+
+### 1. Planning — decide before you build
+
+The `planning` skill is the front door for any non-trivial work. It lays out 2–3 approaches with tradeoffs tied to *your* repo and dependencies (not generic pros/cons), recommends one but shows the alternatives, and walks the tradeoffs even when you've already chosen — so you can reason through it rather than be railroaded. Once an approach is picked, it scopes **down** to the minimal testable slice; spillover is parked in the backlog, and any shift in direction is reflected in the build plan. Clarifying questions are limited to what actually blocks progress — the rest it finds by reading the code.
+
+### 2. Lean execution — the smallest testable steps
+
+This is the namesake. Build the minimal slice first and iterate testably, favoring dead-simple over production-ready (production concerns get discussed so they're on the table, not pre-built).
+
+- **Small slice → just build it.** No written plan; a plan would be overhead.
+- **Large / multi-file slice → `writing-plans` first**, turning it into a concrete, file-specific task doc detailed enough to execute autonomously.
+- **When it does write a plan, it stays lean:** the fewest independently-verifiable steps, merging work that's always built and tested together rather than one task per file, and keeping *deferred* work as a one-line pointer to the backlog instead of fully specced phases. The point is to avoid over-phased plans that re-expand everything you just scoped down.
+
+### 3. Living docs — the repo is the context (state management)
+
+Four documents the harness keeps current in every repo, so context survives between sessions:
+
+- **CHANGELOG.md** — what changed and why (`changelog` skill, on each meaningful change)
+- **BACKLOG.md** — deferred work, as an **Obsidian Kanban board** committed in the repo (`backlog` skill, whenever something's parked)
+- **BUILD_PLAN.md** — the high-level roadmap; near-term detailed, further-out directional (seeded by `planning`, maintained by lint)
+- **README.md** — what the project is and how to use it (refreshed by `changelog` when a change affects it)
+
+The split that makes this work: the *why* behind a change is perishable, so skills capture it in the moment; the *state* of the docs is reconstructable, so `/lint-docs` audits all four against the repo and fixes drift on demand.
+
+### 4. Discipline where it pays — not ceremony
+
+- **`systematic-debugging`** — find the root cause (tracing, defense-in-depth) before proposing a fix.
+- **`test-driven-development`** — RED-GREEN-REFACTOR when logic is worth protecting (parsing, money, auth, bugfixes); skipped for spikes, glue, and throwaway scaffolding.
+- **`verification-before-completion`** — run the check and confirm the output before claiming something's done.
+
+No mandatory test-first-on-everything, and no forced subagent / worktree / review pipeline that overscopes solo, fast-moving work.
 
 ## Who it's for
 
@@ -31,37 +67,18 @@ This harness encodes an opinionated way of working with a coding agent. The bets
 ## How it works
 
 - **A SessionStart hook** injects a short bootstrap each session, telling the agent which skills exist and when to reach for them.
-- **Skills** auto-trigger from their descriptions — you just talk ("let's build X", "backlog that", "update the changelog") and the right one fires.
-- **One command**, `/lint-docs`, for the explicit, on-demand reconcile of the repo's living docs.
+- **Skills auto-trigger from their descriptions** — you just talk ("let's build X", "backlog that", "update the changelog") and the right one fires.
+- **One command, `/lint-docs`**, for the explicit, on-demand reconcile of the living docs.
+- **Skills are advisory, not absolute** — your explicit instructions and saved memory always outrank them.
 
-Skills are advisory, not absolute — your explicit instructions and saved memory always outrank them.
-
-## Living docs
-
-Four documents the harness keeps current in every repo:
-
-- **CHANGELOG.md** — what changed and why (`changelog` skill, on each meaningful change)
-- **BACKLOG.md** — deferred work, as an **Obsidian Kanban board** committed in the repo (`backlog` skill, whenever something's parked)
-- **BUILD_PLAN.md** — the high-level roadmap; near-term detailed, further-out directional (seeded by `planning`, maintained by lint)
-- **README.md** — what the project is and how to use it (refreshed by `changelog` when a change affects it)
-
-The split: the *why* is perishable, so skills capture it in the moment; the *state* is reconcilable, so `/lint-docs` audits all four against the repo and fixes drift on demand.
-
-## The workflow it encodes
-
-1. **Plan** (`planning`) — approaches + tradeoffs, then scope to the minimal testable slice; spillover → `backlog`; direction → `BUILD_PLAN`.
-2. **Build** — small slice: just build it and iterate testably. Large/multi-file: write a task plan first (`writing-plans`).
-3. **Debug** (`systematic-debugging`) — find the root cause before patching.
-4. **Verify** (`verification-before-completion`) — show evidence before claiming done.
-5. **Record** (`changelog`) — log what + why as work lands; refresh the README if affected.
-6. **Reconcile** (`/lint-docs`, on demand) — fix any drift across the four living docs.
+End to end, that's: **plan** (`planning`) → **build** (lean slice, or `writing-plans` for big ones) → **debug** (`systematic-debugging`) → **verify** (`verification-before-completion`) → **record** (`changelog`) → **reconcile** (`/lint-docs`, on demand).
 
 ## Skills
 
 | Skill | Fires when | What it does |
 |---|---|---|
-| `planning` | Before non-trivial build/design work, or "help me think through X" | Lays out approaches + tradeoffs, scopes to the minimal testable version, backlogs the spillover, seeds `BUILD_PLAN`. The front door for new work. |
-| `writing-plans` | After planning, only for large/multi-file slices | Turns the chosen slice into a concrete, file-by-file task plan detailed enough to execute autonomously. Skipped for small slices. |
+| `planning` | Before non-trivial build/design work, or "help me think through X" | Approaches + tradeoffs, scopes to the minimal testable version, backlogs the spillover, seeds `BUILD_PLAN`. The front door for new work. |
+| `writing-plans` | After planning, only for large/multi-file slices | Turns the chosen slice into a concrete, file-by-file task plan — fewest verifiable steps, deferred work left as a pointer. Skipped for small slices. |
 | `systematic-debugging` | Any bug, test failure, or unexpected behavior | Structured root-cause analysis (tracing, defense-in-depth) before proposing a fix. |
 | `test-driven-development` | Logic worth protecting — parsing, money, auth, bugfixes | RED-GREEN-REFACTOR, when it earns its keep. Skipped for spikes, glue, and throwaway MVP scaffolding. |
 | `verification-before-completion` | About to claim something is done / fixed / passing | Run verification and confirm the output before asserting success. |
@@ -114,4 +131,4 @@ lean-powers/
 
 ## Credits
 
-Derived from [obra/superpowers](https://github.com/obra/superpowers) (MIT) — the original skill content and the SessionStart hook plumbing are upstream's. The curation, the softened bootstrap and TDD, the `planning` / `backlog` / `changelog` skills, and the `/lint-docs` command are local.
+Derived from [obra/superpowers](https://github.com/obra/superpowers) (MIT) — the original skill content and the SessionStart hook plumbing are upstream's. The curation, the softened bootstrap and TDD, the `planning` / `backlog` / `changelog` skills, and the `/lint-docs` command are local. License retains the upstream copyright; see [LICENSE](plugins/lean-powers/LICENSE).
