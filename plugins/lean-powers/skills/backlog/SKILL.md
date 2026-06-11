@@ -9,7 +9,7 @@ Fire this whenever a task or idea is deferred instead of built — don't wait to
 
 ## What to do
 
-1. Write to `BACKLOG.md` at the root of the current repo, in Obsidian Kanban format. If it doesn't exist, create it from the skeleton below.
+1. Locate the board first, don't blindly create one. Resolve the repo root with `git rev-parse --show-toplevel`; the board is `<root>/BACKLOG.md`, in Obsidian Kanban format. Append/groom into it if it exists there; create it from the skeleton below **only** if it's absent at the root — never spawn a second board from a subdirectory.
 2. Add the item(s) as `- [ ]` cards under **Backlog**, one concise line each. Several things deferred in one breath = several cards.
 3. Groom while you're there — don't just append:
    - merge near-duplicate cards into one

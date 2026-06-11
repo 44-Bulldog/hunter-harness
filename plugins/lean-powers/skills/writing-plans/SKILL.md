@@ -28,6 +28,8 @@ Break the work into concrete steps, each producing a self-contained change that 
 
 Use the fewest steps that each stay independently verifiable. Merge anything always built and tested together; split only when a step gets too big to verify in one go, or a natural test boundary falls between them. A 2–4 file change is usually 1–3 tasks, not one task per file.
 
+**Count acceptance tests, not features.** Size is a rough guide; the sharp test is the test itself. A step earns its own boundary only if it's independently testable *and* that test buys something — it de-risks a real unknown, or it's a checkpoint you'd actually stop at. If two features die on the *same* test, they're one step. If the only way to test step N is "step N+1 now works," they were never two steps.
+
 Detail only the slice you're building now. Work already deferred during planning (parked in `BACKLOG.md`) stays a one-line pointer here, not a full task block — unless the user explicitly asks for a detailed plan of the later work too.
 
 ## Task structure

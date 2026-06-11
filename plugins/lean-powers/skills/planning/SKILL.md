@@ -1,6 +1,6 @@
 ---
 name: planning
-description: Use before any non-trivial build, feature, or design work, and whenever the user says "help me think through" something. Lays out approaches with tradeoffs, then scopes down to the minimal testable version before any code.
+description: Use whenever the user wants to build, add, implement, refactor, redesign, or "figure out how to approach" something non-trivial — and whenever they say "help me think through" a decision. Lays out approaches with tradeoffs, then scopes down to the minimal testable version before any code.
 ---
 
 # Planning
@@ -13,11 +13,11 @@ Use this before building anything non-trivial, and whenever the user wants to th
 
 2. **Lay out 2–3 approaches with tradeoffs.** Tie each tradeoff to *this* plan, *this* repo, and existing dependencies — not generic pros/cons. A recommendation is welcome, but always show the alternatives and why. Even when the user has already proposed an approach, walk through its tradeoffs against the alternatives before committing — they usually still pick theirs, but want to reason through it first.
 
-3. **Converge, then scope DOWN to the minimal testable version.** Once the approach is chosen, cut it to the smallest slice that can actually be run and tested. Sequence the rest so each step is independently testable. Favor dead-simple over production-ready: discuss production concerns (scale, error handling, edge cases) so they're on the table, but don't build them yet.
+3. **Converge, then scope DOWN to the minimal testable version.** Once the approach is chosen, cut it to the smallest slice that can actually be run and tested. Sequence the rest so each step is independently testable — but count acceptance tests, not features: a step earns its own boundary only if its test buys something (de-risks a real unknown, or is a checkpoint you'd actually stop at). Favor dead-simple over production-ready: discuss production concerns (scale, error handling, edge cases) so they're on the table, but don't build them yet.
 
-4. **Park the spillover.** Everything deferred during scope-down goes to `BACKLOG.md` at the repo root (Obsidian Kanban format). Groom while you're there: merge near-duplicates, drop exact dupes, flag contradictions. Don't just append.
+4. **Park the spillover.** Everything deferred during scope-down goes to the repo's `BACKLOG.md` (Obsidian Kanban format) — at the repo root (`git rev-parse --show-toplevel`), not the current subdirectory. Groom while you're there: merge near-duplicates, drop exact dupes, flag contradictions. Don't just append.
 
-5. **Hand off to execution.** With the approach and the minimal slice defined: for a small slice, just build it — implementation is writing code + testing + fixing, iterating testably. For a large or multi-file slice, use the `writing-plans` skill first to turn it into a concrete task doc, then execute. Check back in only where the plan was genuinely uncertain.
+5. **Hand off to execution.** With the approach and the minimal slice defined: for a small slice, just build it — implementation is writing code + testing + fixing, iterating testably. For a large or multi-file slice, use the `writing-plans` skill first to turn it into a concrete task doc, then execute. If the work decomposes into 2+ streams with no shared state or ordering dependency, you may *propose* running them as parallel sub-agents — each isolated in its own git worktree if they touch files — but ask before dispatching; default to serial and in-place. Check back in only where the plan was genuinely uncertain.
 
 **Roadmap.** If the plan sets or shifts the project's overall direction, reflect it in `BUILD_PLAN.md` — a high-level living roadmap (near-term detailed, further-out directional, kept lean). Ongoing progress on it is reconciled by `/lint-docs`, not maintained here.
 
@@ -30,6 +30,7 @@ Use this before building anything non-trivial, and whenever the user wants to th
 | "I should ask 8 clarifying questions" | Ask only what blocks. Find the rest in the code. |
 | "The user gave their approach, so just do it" | Still surface the tradeoffs against alternatives first. |
 | "I'll keep these extra ideas in the plan" | Park them in BACKLOG.md; don't bloat the current slice. |
+| "I'll just spin up parallel agents / a worktree for this" | Only if the work is genuinely independent — propose it and wait for approval. Never fan out unilaterally; default serial/in-place. |
 
 ## Output
 
